@@ -7,6 +7,10 @@ var ul = document.createElement("ul");
 
 deezer.appendChild(ul);
 
+var shazaam = document.getElementById("shazaam");
+var ulshazaam = document.createElement("ul");
+shazaam.appendChild(ulshazaam);
+
 // Execute a function when the user presses a key on the keyboard
 input.addEventListener("keypress", function (event) {
   // If the user presses the "Enter" key on the keyboard
@@ -50,36 +54,47 @@ input.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     console.log(search);
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-RapidAPI-Key': 'ee310b7c05mshc4b96b46b4c303ap188ee9jsn3ab3d55f6f28',
-        'X-RapidAPI-Host': 'shazam.p.rapidapi.com'
-      }
+        "X-RapidAPI-Key": "ee310b7c05mshc4b96b46b4c303ap188ee9jsn3ab3d55f6f28",
+        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+      },
     };
 
-    fetch("https://shazam.p.rapidapi.com/search?term=" + search + "&locale=en-US&offset=0&limit=5", options)
-      .then(response => response.json())
-      .then(function (data) {
-        console.log(data.tracks.hits[4].track.key);
-        var key= data.tracks.hits[4].track.key;
+    fetch(
+      "https://shazam.p.rapidapi.com/search?term=" +
+        search +
+        "&locale=en-US&offset=0&limit=5",
+      options
+    )
+      .then((response) => response.json())
+      .then(
+        function (data) {
+          console.log(data.tracks.hits[4].track.key);
+          var key = data.tracks.hits[4].track.key;
+
+          fetch(
+            "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" +
+              key +
+              "&locale=en-US",
+            options
+          )
+            .then((response) => response.json())
+            .then(function (data) {
+              console.log(data);
+              for (let i = 0; i < 10; i++) {
+                var li = document.createElement("li");
+                var video = document.createElement("video");
+                video.setAttribute("src", data.tracks[i].hub.actions[1].uri);
+                video.setAttribute("controls", "controls");
+                li.textContent = data.tracks[i].title;
+                li.appendChild(video);
+                ulshazaam.appendChild(li);
+              }
+            })
+            
+        }
         
-        // const options = {
-        //   method: 'GET',
-        //   headers: {
-        //     'X-RapidAPI-Key': 'ee310b7c05mshc4b96b46b4c303ap188ee9jsn3ab3d55f6f28',
-        //     'X-RapidAPI-Host': 'shazam.p.rapidapi.com'
-        //   }
-        // };
-        
-        fetch("https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + key + "&locale=en-US", options)
-          .then(response => response.json())
-          .then(function (data) {
-            console.log(data);
-          })
-          .catch(err => console.error(err));
-      }
-        // .catch(err => console.error(err))
-      
-        )
-  };
+      );
+  }
 });
