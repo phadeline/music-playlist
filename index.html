@@ -14,6 +14,15 @@
     />
 
     <link rel="stylesheet" href="./assets/css/style.css"" />
+    <style>
+      body {
+        background: url("./assets/images/backgroundimage.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        background-position: bottom;
+        background-size: cover;
+      }
+    </style>
   </head>
   <body>
     <nav
@@ -56,19 +65,19 @@
             class="input is-large is-rounded"
             type="text"
             placeholder="Search for An Artist, Genre, or Songtitle"
+            id="myInput"
           />
-         
         </div>
       </section>
       <div
         id="columns"
         class="columns is-desktop is-mobile is-flex-direction-row is-justify-content-space-around"
       >
-        <div class="is-one-third" id="youtube">Youtube</div>
+        <div class="is-one-third" id="deezer">Deezer</div>
         <div class="is-one-third" id="soundcloud">Soundcloud</div>
         <div class="is-one-third" id="playlist">Your Playlist</div>
       </div>
     </div>
-    
   </body>
+  <script src="assets/js/script.js"></script>
 </html>
