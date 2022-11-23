@@ -22,7 +22,7 @@
     border-style: dashed;
     width: 450px;
     text-align: center;
-    height: 500px;
+    height: 100%;
 }
 
 li {
@@ -34,4 +34,10 @@ li {
     user-select: none;
     padding: 15px;
     background-color: blueviolet;
+}
+
+.video {
+    user-select: none;
+    padding: 15px;
+    background-color: rgb(17, 232, 135);
 }
