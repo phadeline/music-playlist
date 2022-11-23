@@ -1,13 +1,37 @@
+.name {
+    font-family: 'Xanh Mono';
+    font-size: 30px;
+    color: white;
+    position: relative;
+    top: 10px;
+}
 
-.name{font-family: 'Xanh Mono'; font-size: 30px; color: white; position: relative; top: 10px;}
-.aboutus {font-family: 'Xanh Mono'; font-size: x-large;}
+.aboutus {
+    font-family: 'Xanh Mono';
+    font-size: x-large;
+}
 
 
-.title {font-size: 50px !important; margin-bottom: 50px}
+.title {
+    font-size: 50px !important;
+    margin-bottom: 50px
+}
 
 
-.is-one-third {border-style: dashed; width: 450px; text-align: center; height: 500px;}
+.is-one-third {
+    border-style: dashed;
+    width: 450px;
+    text-align: center;
+    height: 500px;
+}
 
+li {
+    padding: 0.25rem;
+    margin: 0.25rem
+}
 
-
-
+.songs {
+    user-select: none;
+    padding: 15px;
+    background-color: blueviolet;
+}

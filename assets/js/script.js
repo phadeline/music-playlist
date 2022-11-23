@@ -39,7 +39,9 @@ input.addEventListener("keypress", function (event) {
           video.setAttribute("src", data.data[i].preview);
           video.setAttribute("controls", "controls");
           li.textContent = data.data[i].title;
+          li.setAttribute("class","songs");
           li.appendChild(video);
+          li.setAttribute("draggable","true");
           ul.appendChild(li);
         }
       });
@@ -88,7 +90,9 @@ input.addEventListener("keypress", function (event) {
                 video.setAttribute("src", data.tracks[i].hub.actions[1].uri);
                 video.setAttribute("controls", "controls");
                 li.textContent = data.tracks[i].title;
+                li.setAttribute("class","songs");
                 li.appendChild(video);
+                li.setAttribute("draggable","true");
                 ulshazaam.appendChild(li);
               }
             })
@@ -96,5 +100,55 @@ input.addEventListener("keypress", function (event) {
         }
         
       );
+  }
+});
+
+// // Drag and drop for Deezer
+// let dragged1 = null;
+
+// const source1 = document.getElementById("deezer");
+// source1.addEventListener("dragstart", (event) => {
+//   // store a ref. on the dragged elem
+//   dragged1 = event.target1;
+// });
+
+// const target1 = document.getElementById("playlist");
+// target1.addEventListener("dragover", (event) => {
+//   // prevent default to allow drop
+//   event.preventDefault();
+// });
+
+// target1.addEventListener("drop", (event) => {
+//   // prevent default action (open as link for some elements)
+//   event.preventDefault();
+//   // move dragged element to the selected drop target
+//   if (event.target1.className === "is-one-third") {
+//     dragged1.parentNode.removeChild(dragged1);
+//     event.target1.appendChild(dragged1);
+//   }
+// });
+
+// drag and drop for Shazaam
+let dragged = null;
+
+const source = document.getElementById("shazaam");
+source.addEventListener("dragstart", (event) => {
+  // store a ref. on the dragged elem
+  dragged = event.target;
+});
+
+const target = document.getElementById("playlist");
+target.addEventListener("dragover", (event) => {
+  // prevent default to allow drop
+  event.preventDefault();
+});
+
+target.addEventListener("drop", (event) => {
+  // prevent default action (open as link for some elements)
+  event.preventDefault();
+  // move dragged element to the selected drop target
+  if (event.target.className === "is-one-third") {
+    dragged.parentNode.removeChild(dragged);
+    event.target.appendChild(dragged);
   }
 });
