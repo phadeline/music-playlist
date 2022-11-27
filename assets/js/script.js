@@ -16,6 +16,7 @@ input.addEventListener("keypress", function (event) {
   // If the user presses the "Enter" key on the keyboard
   var search = document.getElementById("myInput").value;
   if (event.key === "Enter") {
+    ul.textContent = " ";
     console.log(search);
     const options = {
       method: "GET",
@@ -41,6 +42,11 @@ input.addEventListener("keypress", function (event) {
           video.setAttribute("src", data.data[i].preview);
           video.setAttribute("controls", "controls");
           li.setAttribute("class", "video");
+          let image = data.data[i].album.cover_medium;
+          li.style.cssText =
+            "background-image: url(' " + image + " '); list-style-type: none;";
+          songname.style.cssText =
+            "background-color: pink; color: black; font-size: 30px";
           li.appendChild(songname);
           li.appendChild(video);
           li.setAttribute("draggable", "true");
@@ -56,6 +62,7 @@ input.addEventListener("keypress", function (event) {
   // If the user presses the "Enter" key on the keyboard
   var search = document.getElementById("myInput").value;
   if (event.key === "Enter") {
+    ulshazaam.textContent = " ";
     console.log(search);
 
     fetch("https://itunes.apple.com/search?term=" + search + "&media=music")
@@ -66,10 +73,14 @@ input.addEventListener("keypress", function (event) {
           var li = document.createElement("li");
           var ptitle = document.createElement("p");
           var video = document.createElement("video");
+          let image = data.results[i].artworkUrl100;
           ptitle.textContent = data.results[i].trackName;
+          ptitle.style.cssText =
+            "background-color: pink; color: black; font-size: 30px";
           video.setAttribute("src", data.results[i].previewUrl);
           video.setAttribute("controls", "controls");
-          // li.textContent = data.tracks[i].title;
+          li.style.cssText =
+            "background-image: url(' " + image + " '); list-style-type: none;";
           li.setAttribute("class", "songs");
           li.appendChild(ptitle);
           li.appendChild(video);
@@ -101,6 +112,16 @@ target.addEventListener("drop", (event) => {
   // move dragged element to the selected drop target
   if (event.target.className === "is-one-third") {
     event.target.appendChild(dragged);
+    let title = $(dragged).children("p").text();
+    let videourl = $(dragged).children("video").attr("src");
+    let backgroundimage = $(dragged).css("background-image");
+    let playlists = JSON.parse(localStorage.getItem("playlistsongs")) || [];
+    playlists.push({
+      thetitle: title,
+      thevideo: videourl,
+      theimage: backgroundimage,
+    });
+    localStorage.setItem("playlistsongs", JSON.stringify(playlists));
   }
 });
 
@@ -125,14 +146,9 @@ deezertarget.addEventListener("drop", (event) => {
   if (event.target.className === "is-one-third") {
     event.target.appendChild(dragged);
     var button = document.createElement("button");
+
     button.textContent = "Remove";
     dragged.appendChild(button);
-
-    let title = $(dragged).children("p").text();
-    let videourl = $(dragged).children("video").attr("src");
-    let playlists = JSON.parse(localStorage.getItem("playlistsongs")) || [];
-    playlists.push({ thetitle: title, thevideo: videourl });
-    localStorage.setItem("playlistsongs", JSON.stringify(playlists));
 
     button.addEventListener("click", function () {
       button.parentNode.remove();
@@ -146,9 +162,11 @@ $(document).ready(function () {
 
   for (let i = 0; i < value.length; i++) {
     var li = $("<li>");
-    $(li).css({ "list-style-type": "none", padding: "10px" });
+    $(li).css({ "list-style-type": "none" });
+    $(li).css({ "background-image": value[i].theimage });
     var p = $("<p>");
     p.text(value[i].thetitle);
+    $(p).css({ "background-color": "pink", color: "black" });
     $(li).append(p);
 
     var videos = $("<video>");
