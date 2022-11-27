@@ -35,11 +35,13 @@ input.addEventListener("keypress", function (event) {
 
         for (let i = 0; i < 10; i++) {
           var li = document.createElement("li");
+          var songname = document.createElement("p");
           var video = document.createElement("video");
+          songname.textContent = data.data[i].title;
           video.setAttribute("src", data.data[i].preview);
           video.setAttribute("controls", "controls");
-          li.textContent = data.data[i].title;
           li.setAttribute("class", "video");
+          li.appendChild(songname);
           li.appendChild(video);
           li.setAttribute("draggable", "true");
           ul.appendChild(li);
@@ -55,51 +57,30 @@ input.addEventListener("keypress", function (event) {
   var search = document.getElementById("myInput").value;
   if (event.key === "Enter") {
     console.log(search);
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "ee310b7c05mshc4b96b46b4c303ap188ee9jsn3ab3d55f6f28",
-        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-      },
-    };
 
-    fetch(
-      "https://shazam.p.rapidapi.com/search?term=" +
-        search +
-        "&locale=en-US&offset=0&limit=5",
-      options
-    )
+    fetch("https://itunes.apple.com/search?term=" + search + "&media=music")
       .then((response) => response.json())
       .then(function (data) {
-        console.log(data.tracks.hits[4].track.key);
-        var key = data.tracks.hits[4].track.key;
-
-        fetch(
-          "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" +
-            key +
-            "&locale=en-US",
-          options
-        )
-          .then((response) => response.json())
-          .then(function (data) {
-            console.log(data);
-            for (let i = 0; i < 10; i++) {
-              var li = document.createElement("li");
-              var video = document.createElement("video");
-              video.setAttribute("src", data.tracks[i].hub.actions[1].uri);
-              video.setAttribute("controls", "controls");
-              li.textContent = data.tracks[i].title;
-              li.setAttribute("class", "songs");
-              li.appendChild(video);
-              li.setAttribute("draggable", "true");
-              ulshazaam.appendChild(li);
-            }
-          });
+        console.log(data);
+        for (let i = 0; i < 10; i++) {
+          var li = document.createElement("li");
+          var ptitle = document.createElement("p");
+          var video = document.createElement("video");
+          ptitle.textContent = data.results[i].trackName;
+          video.setAttribute("src", data.results[i].previewUrl);
+          video.setAttribute("controls", "controls");
+          // li.textContent = data.tracks[i].title;
+          li.setAttribute("class", "songs");
+          li.appendChild(ptitle);
+          li.appendChild(video);
+          li.setAttribute("draggable", "true");
+          ulshazaam.appendChild(li);
+        }
       });
   }
 });
 
-// drag and drop for Shazaam
+// drag and drop for Itunes
 let dragged = null;
 
 const source = document.getElementById("shazaam");
@@ -119,7 +100,6 @@ target.addEventListener("drop", (event) => {
   event.preventDefault();
   // move dragged element to the selected drop target
   if (event.target.className === "is-one-third") {
-    dragged.parentNode.removeChild(dragged);
     event.target.appendChild(dragged);
   }
 });
@@ -143,7 +123,44 @@ deezertarget.addEventListener("drop", (event) => {
   event.preventDefault();
   // move dragged element to the selected drop target
   if (event.target.className === "is-one-third") {
-    dragged.parentNode.removeChild(dragged);
     event.target.appendChild(dragged);
+    var button = document.createElement("button");
+    button.textContent = "Remove";
+    dragged.appendChild(button);
+
+    let title = $(dragged).children("p").text();
+    let videourl = $(dragged).children("video").attr("src");
+    let playlists = JSON.parse(localStorage.getItem("playlistsongs")) || [];
+    playlists.push({ thetitle: title, thevideo: videourl });
+    localStorage.setItem("playlistsongs", JSON.stringify(playlists));
+
+    button.addEventListener("click", function () {
+      button.parentNode.remove();
+    });
+  }
+});
+
+$(document).ready(function () {
+  let value = JSON.parse(localStorage.getItem("playlistsongs")) || [];
+  let playlistdata = $("#playlist");
+
+  for (let i = 0; i < value.length; i++) {
+    var li = $("<li>");
+    $(li).css({ "list-style-type": "none", padding: "10px" });
+    var p = $("<p>");
+    p.text(value[i].thetitle);
+    $(li).append(p);
+
+    var videos = $("<video>");
+    videos.attr("src", value[i].thevideo);
+    videos.attr("controls", "controls");
+    $(li).append(videos);
+
+    var p2 = $("<p>");
+    var button2 = $("<button>");
+    button2.text("Remove");
+    $(p2).append(button2);
+    $(li).append(p2);
+    $(playlistdata).append(li);
   }
 });
