@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello Bulma!</title>
+    <title>Music Playlist</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
@@ -32,15 +32,7 @@
     >
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="name"> Music Mix </a>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <a class="button is-primary aboutus">
-              <strong>About Us</strong>
-            </a>
-          </div>
+          <a class="name"> Music Playlist </a>
         </div>
       </div>
     </nav>
@@ -64,7 +56,7 @@
           <input
             class="input is-large is-rounded"
             type="text"
-            placeholder="Search for An Artist, Genre, or Songtitle"
+            placeholder="Search for An Artist or Songtitle"
             id="myInput"
           />
         </div>
@@ -74,10 +66,13 @@
         class="columns is-desktop is-mobile is-flex-direction-row is-justify-content-space-around"
       >
         <div class="is-one-third" id="deezer">Deezer</div>
-        <div class="is-one-third" id="shazaam">Shazaam</div>
+
+        <div class="is-one-third" id="shazaam">Itunes</div>
         <div class="is-one-third" id="playlist">Your Playlist</div>
       </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script src="./assets/js/script.js"></script>
   </body>
