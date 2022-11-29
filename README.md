@@ -35,8 +35,8 @@ Two server-side APIs were used to obtain music results: **Deezer API** and **Itu
 
 ## Installation
 No installation is requried. 
-Here is the deployed link: https://jrodz0313.github.io/music-playlist/
-Here is the repo link: https://github.com/Jrodz0313/music-playlist
+Here is the deployed link: https://phadeline.github.io/music-playlist/
+Here is the repo link: https://github.com/phadeline/music-playlist
 
 
 ## Usage
