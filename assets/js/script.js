@@ -147,10 +147,11 @@ deezertarget.addEventListener("drop", (event) => {
   // move dragged element to the selected drop target
   if (event.target.className === "is-one-third") {
     event.target.appendChild(dragged);
-    var button = document.createElement("button");
+//     var button = document.createElement("button");
 
-    button.textContent = "Remove";
-    dragged.appendChild(button);
+//     button.textContent = "Remove";
+//     dragged.appendChild(button);
+
 
     button.addEventListener("click", function () {
       button.parentNode.remove();
@@ -159,6 +160,7 @@ deezertarget.addEventListener("drop", (event) => {
       playlists.splice(index - 1, 1);
       localStorage.setItem("playlistsongs", JSON.stringify(playlists));
     });
+
   }
 });
 
@@ -186,11 +188,13 @@ $(document).ready(function () {
     videos.attr("controls", "controls");
     $(li).append(videos);
 
-    // var p2 = $("<p>");
+
+  
     var button2 = $("<button>");
     button2.text("Remove");
     $(li).append(button2);
-    // $(li).append(p2);
+  
+
     $(playlistdata).append(li);
 
     $(button2).on("click", function () {
