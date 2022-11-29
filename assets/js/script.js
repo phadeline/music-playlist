@@ -93,6 +93,8 @@ input.addEventListener("keypress", function (event) {
 
 // drag and drop for Itunes
 let dragged = null;
+let playlists = JSON.parse(localStorage.getItem("playlistsongs")) || [];
+let index = "";
 
 const source = document.getElementById("shazaam");
 source.addEventListener("dragstart", (event) => {
@@ -116,7 +118,6 @@ target.addEventListener("drop", (event) => {
     let title = $(dragged).children("p").text();
     let videourl = $(dragged).children("video").attr("src");
     let backgroundimage = $(dragged).css("background-image");
-    let playlists = JSON.parse(localStorage.getItem("playlistsongs")) || [];
     playlists.push({
       thetitle: title,
       thevideo: videourl,
@@ -151,35 +152,59 @@ deezertarget.addEventListener("drop", (event) => {
 //     button.textContent = "Remove";
 //     dragged.appendChild(button);
 
-//     button.addEventListener("click", function () {
-//       button.parentNode.remove();
-//     });
+
+    button.addEventListener("click", function () {
+      button.parentNode.remove();
+      removefromPlaylist();
+
+      playlists.splice(index - 1, 1);
+      localStorage.setItem("playlistsongs", JSON.stringify(playlists));
+    });
+
   }
 });
 
+function removefromPlaylist() {
+  let title = $(dragged).children("p").text();
+  let index = playlists.findIndex((thesong) => thesong.thetitle === title);
+  console.log(index);
+  return index;
+}
+
 $(document).ready(function () {
-  let value = JSON.parse(localStorage.getItem("playlistsongs")) || [];
   let playlistdata = $("#playlist");
 
-  for (let i = 0; i < value.length; i++) {
+  for (let i = 0; i < playlists.length; i++) {
     var li = $("<li>");
     $(li).css({ "list-style-type": "none" });
-    $(li).css({ "background-image": value[i].theimage });
+    $(li).css({ "background-image": playlists[i].theimage });
     var p = $("<p>");
-    p.text(value[i].thetitle);
+    p.text(playlists[i].thetitle);
     $(p).css({ "background-color": "pink", color: "black" });
     $(li).append(p);
 
     var videos = $("<video>");
-    videos.attr("src", value[i].thevideo);
+    videos.attr("src", playlists[i].thevideo);
     videos.attr("controls", "controls");
     $(li).append(videos);
 
-//     var p2 = $("<p>");
-//     var button2 = $("<button>");
-//     button2.text("Remove");
-//     $(p2).append(button2);
-//     $(li).append(p2);
+
+  
+    var button2 = $("<button>");
+    button2.text("Remove");
+    $(li).append(button2);
+  
+
     $(playlistdata).append(li);
+
+    $(button2).on("click", function () {
+      $(this).parent().remove();
+
+      index = playlists.findIndex((thesong) => thesong.thetitle === p.text());
+      console.log(index);
+
+      playlists.splice(index - 1, 1);
+      localStorage.setItem("playlistsongs", JSON.stringify(playlists));
+    });
   }
 });
