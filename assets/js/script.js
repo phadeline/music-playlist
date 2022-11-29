@@ -111,6 +111,7 @@ target.addEventListener("drop", (event) => {
   event.preventDefault();
   // move dragged element to the selected drop target
   if (event.target.className === "is-one-third") {
+    // for (let i = 0; i < )
     event.target.appendChild(dragged);
     let title = $(dragged).children("p").text();
     let videourl = $(dragged).children("video").attr("src");
