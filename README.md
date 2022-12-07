@@ -1,7 +1,7 @@
 # Musicplaylist 
 
 ## Description
-For this project (*Module 07: Porject 1 Week 1*), students were instructed to builf a web application from scratch. With a team, we conveiced and executed a design that solves some form of a real-world problem by integrating data received from multiple server-side API requests. Our group chose to focus on music and it's ability to produce emotions with the right playlist. There are many times when people try to create a playlist but don't know where to start, that is where our web application comes into play. Users can search songs and artists and listen to just 30 second previews of the song so they can begin to build their ultimate playlist for either a night in by themselves or the biggest party they'll be throwing. 
+For this project (*Module 07: Project 1 Week 1*), students were instructed to builf a web application from scratch. With a team, we conveiced and executed a design that solves some form of a real-world problem by integrating data received from multiple server-side API requests. Our group chose to focus on music and it's ability to produce emotions with the right playlist. There are many times when people try to create a playlist but don't know where to start, that is where our web application comes into play. Users can search songs and artists and listen to just 30 second previews of the song so they can begin to build their ultimate playlist for either a night in by themselves or the biggest party they'll be throwing. 
 
 ## Table of Contents
 - [User Story](#userstory)
