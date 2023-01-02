@@ -65,7 +65,9 @@ input.addEventListener("keypress", function (event) {
     ulshazaam.textContent = " ";
     console.log(search);
 
-    fetch("https://itunes.apple.com/search?term=" + search + "&media=music")
+    fetch("https://itunes.apple.com/search?term=" + search + "&media=music", {
+      mode: "cors",
+    })
       .then((response) => response.json())
       .then(function (data) {
         console.log(data);
@@ -147,11 +149,10 @@ deezertarget.addEventListener("drop", (event) => {
   // move dragged element to the selected drop target
   if (event.target.className === "is-one-third") {
     event.target.appendChild(dragged);
-//     var button = document.createElement("button");
+    //     var button = document.createElement("button");
 
-//     button.textContent = "Remove";
-//     dragged.appendChild(button);
-
+    //     button.textContent = "Remove";
+    //     dragged.appendChild(button);
 
     button.addEventListener("click", function () {
       button.parentNode.remove();
@@ -160,7 +161,6 @@ deezertarget.addEventListener("drop", (event) => {
       playlists.splice(index - 1, 1);
       localStorage.setItem("playlistsongs", JSON.stringify(playlists));
     });
-
   }
 });
 
@@ -188,12 +188,9 @@ $(document).ready(function () {
     videos.attr("controls", "controls");
     $(li).append(videos);
 
-
-  
     var button2 = $("<button>");
     button2.text("Remove");
     $(li).append(button2);
-  
 
     $(playlistdata).append(li);
 
