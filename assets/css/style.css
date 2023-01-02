@@ -1,59 +1,69 @@
 .name {
-    font-family: 'Xanh Mono';
-    font-size: 30px;
-    color: white;
-    position: relative;
-    top: 10px;
+  font-family: "Xanh Mono";
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(34, 171, 7);
+  width: 100%;
+  margin: 0px;
+  padding: 10px;
+ 
 }
-
-.aboutus {
-    font-family: 'Xanh Mono';
-    font-size: x-large;
-}
-
 
 .title {
-    font-size: 50px !important;
-    margin-bottom: 50px
+  font-size: 50px !important;
+  margin-bottom: 50px;
+  color: black;
+  text-align: center;
 }
 
-
 .is-one-third {
-    border-style: dashed;
-    width: 450px;
-    text-align: center;
-    height: 100%;
+  border-style: dashed;
+  width: 33%;
+  text-align: center;
+  height: 100%;
+  margin: 20px;
 }
 
 li {
-    padding: 0.25rem;
-    margin: 0.25rem
+  padding: 0.25rem;
+  margin: 0.25rem;
 }
 
-
 #deezer {
-    color: purple;
-    font-size: 40px;
+  color: purple;
+  font-size: 40px;
 }
 
 #shazaam {
-    color: red;
-    font-size: 40px;
+  color: red;
+  font-size: 40px;
 }
 
 #playlist {
-    color: green;
-    font-size: 40px;
+  color: green;
+  font-size: 40px;
 }
 
 #instructions {
-    font-size: 20px;
-    color: black;
+  font-size: 20px;
+  color: black;
 }
 
-footer {
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    font-family: 'Xanh Mono';
+@media screen and (max-width: 775px) {
+  .is-one-third {
+    margin: 10px;
+  }
+  .columns {
+    display: flex;
+    flex-direction: column;
+  }
+  #shazaam {
+    width: 50%;
+  }
+  #playlist {
+    width: 33%;
+  }
+  #deezer {
+    width: 50%;
+  }
 }
