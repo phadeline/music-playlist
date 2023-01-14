@@ -65,9 +65,7 @@ input.addEventListener("keypress", function (event) {
     ulshazaam.textContent = " ";
     console.log(search);
 
-    fetch("https://itunes.apple.com/search?term=" + search + "&media=music", {
-      mode: "cors",
-    })
+    fetch("https://itunes.apple.com/search?term=" + search + "&media=music")
       .then((response) => response.json())
       .then(function (data) {
         console.log(data);
